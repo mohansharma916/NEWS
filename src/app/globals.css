@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+* {
+  outline: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+} */
+
+img::selection {
+  background: transparent !important;
+}
+
+::selection {
+  color: white;
+  background: #202020;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    display: block;
+    width: 8px;
+    transition: all 1s ease 0s;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #686868;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 1s ease 0s;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    border: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -47,12 +47,25 @@ export const formattedTitle = (title?: string) =>
   title?.substring(title?.split(" ")[0].length);
 
 export const getDate = (data?: string) => {
-  const date = new Date(data ?? new Date());
+ const date = new Date(data || new Date());
+
+  // 2. Safety Check: If the date string is garbage (e.g. "abc"), date.getTime() is NaN
+  // Prevent the crash by returning a fallback or current date
+  if (isNaN(date.getTime())) {
+    return new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date());
+  }
+
+  // 3. Format correctly
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   }).format(date);
+  
   return formattedDate;
 };
 

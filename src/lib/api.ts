@@ -49,6 +49,9 @@ export async function getPostsByCategory(
     `${process.env.NEXT_PUBLIC_API_URL}/posts?category=${categorySlug}&page=${page}&limit=${limit}`, 
     { next: { revalidate: 60 } }
   );
+
+
+  console.log("Fetching posts for category:",process.env.NEXT_PUBLIC_API_URL);
   
   if (!res.ok) return [];
   const json = await res.json();

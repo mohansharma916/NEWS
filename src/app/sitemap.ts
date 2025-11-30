@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000';
 
   // 2. Map posts to sitemap format
-  const postEntries: MetadataRoute.Sitemap = posts.map((post: { slug: any; publishedAt: any; updatedAt: any; }) => ({
+  const postEntries: MetadataRoute.Sitemap = posts.map((post: { slug: string; publishedAt: string; updatedAt: string; }) => ({
     url: `${baseUrl}/news/${post.slug}`,
     lastModified: new Date(post.publishedAt || post.updatedAt),
     changeFrequency: 'daily',

@@ -13,7 +13,6 @@ type Props = {
 export default function CategoryList({
   article,
   heading,
-  isMobile,
 }: Props) {
   // Safety check
   if (!article || article.length === 0) return null;

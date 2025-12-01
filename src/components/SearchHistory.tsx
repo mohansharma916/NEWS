@@ -9,7 +9,7 @@ export const SearchContent: SearchHistoryList[] = [
   {
     Id: "0",
     Key: "recent-search",
-    Value: "Sumeet Kumar Paul",
+    Value: "Nikhil Kamath",
   },
 ];
 

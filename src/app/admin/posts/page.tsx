@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "../../../context/authContext";
-import { PlusIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, PencilSquareIcon,TrashIcon } from "@heroicons/react/24/outline";
 import { getDate } from "utils/Utility";
+import DeleteModal from "components/admin/DeleteModal";
 
 // Define the shape of data from GET /posts/admin/all
 interface AdminPost {
@@ -21,6 +22,9 @@ export default function AdminPostsPage() {
   const { token } = useAuth();
   const [posts, setPosts] = useState<AdminPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Fetch Data
   useEffect(() => {
@@ -44,6 +48,29 @@ export default function AdminPostsPage() {
 
     fetchPosts();
   }, [token]);
+
+  const confirmDelete = async () => {
+    if (!deleteId) return;
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${deleteId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        // Remove from local state immediately (Optimistic UI)
+        setPosts((prev) => prev.filter((p) => p.id !== deleteId));
+        setDeleteId(null);
+      } else {
+        alert("Failed to delete post");
+      }
+    } catch (error) {
+      alert("Error deleting post");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   if (isLoading) return <div className="p-4">Loading posts...</div>;
 
@@ -128,12 +155,26 @@ export default function AdminPostsPage() {
                     <PencilSquareIcon className="h-5 w-5" />
                     <span className="sr-only">Edit</span>
                   </Link>
+                  <button
+                      onClick={() => setDeleteId(post.id)} // <--- Open Modal
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <DeleteModal 
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={confirmDelete}
+        isDeleting={isDeleting}
+        title="Delete Post?"
+        message="Are you sure you want to delete this post? This will remove it from the public site immediately."
+      />
     </div>
   );
 }

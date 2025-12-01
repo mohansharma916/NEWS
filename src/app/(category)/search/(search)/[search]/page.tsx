@@ -1,5 +1,6 @@
 import ResultList from "components/ResultList";
 import SearchFilter from "components/SearchFilter";
+import { Article } from "../../../../../lib/api";
 
 type props = {
   searchParams: Promise<SearchParams>;
@@ -29,7 +30,7 @@ export default async function Search(props: props) {
     }),
   });
 
-  const articles = (await data.json()) as Articles[];
+  const articles = (await data.json()) as Article[];
 
   return (
     <div className="m-0 mx-auto flex w-full max-w-[70rem] flex-col p-0 py-5">

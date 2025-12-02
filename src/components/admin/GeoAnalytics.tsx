@@ -82,7 +82,7 @@ export default function GeoAnalytics() {
             {['24h', '7d', '30d', 'all'].map((r) => (
               <button
                 key={r}
-                onClick={() => setRange(r as any)}
+                onClick={() => setRange(r as '24h' | '7d' | '30d' | 'all')}
                 className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
                   range === r 
                     ? "bg-white text-blue-600 shadow-sm" 

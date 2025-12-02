@@ -141,7 +141,7 @@ export default function EditPostPage() {
              <label className="block text-sm font-medium mb-2">Content</label>
              <Controller
                 name="content" control={control}
-                render={({ field }) => <RichEditor value={field.value ?? ""} onChange={field.onChange} />}
+                render={({ field }) => <RichEditor value={field.value ?? ""} onChange={field.onChange} token={token} />}
              />
            </div>
         </div>

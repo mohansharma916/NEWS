@@ -145,7 +145,7 @@ export default function CreatePostPage() {
             control={control}
             rules={{ required: "Content is required" }}
             render={({ field }) => (
-              <RichEditor value={field.value ?? ""} onChange={field.onChange} />
+              <RichEditor value={field.value ?? ""} onChange={field.onChange} token={token}/>
             )}
           />
           {errors.content && <span className="text-red-500 text-sm">{errors.content.message}</span>}

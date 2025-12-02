@@ -12,6 +12,7 @@ import {
   ChartBarIcon, 
   FireIcon 
 } from "@heroicons/react/24/outline";
+import GeoAnalytics from "components/admin/GeoAnalytics";
 
 // --- Types ---
 interface DashboardData {
@@ -179,7 +180,9 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-
+        <div className="lg:col-span-2">
+            <GeoAnalytics />
+        </div>
         {/* Quick Links / Recent Actions (Simple List) */}
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm lg:col-span-2">
             <h3 className="mb-4 text-lg font-medium text-gray-900">Quick Actions</h3>

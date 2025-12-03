@@ -21,9 +21,22 @@ const Novante = localFont({
   variable: "--font-novante",
 });
 
+
 export const metadata: Metadata = {
-  title: "The View Island • Mohan Sharma",
-  description: "Latest articles in one place • Mohan Sharma",
+  title: {
+    template: '%s | Know Your Views',
+    default: 'Know Your Views - Global News & Insights', // Stronger default
+  },
+  description: 'Understand the world with Know Your Views. Your trusted source for balanced news in Tech, Business, and World events.',
+  metadataBase: new URL('https://knowyourviews.com'), 
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    siteName: 'Know Your Views',
+    type: 'website',
+    locale: 'en_US',
+  },
 };
 
 export const viewport: Viewport = {

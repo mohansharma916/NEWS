@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image"; // If you have a white logo version
+import Image from "next/image"; 
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { JSX, SVGProps } from "react";
 
@@ -107,7 +107,7 @@ export default function Footer() {
           {/* 2. Brand Column */}
           <div className="space-y-8">
             <span className="text-2xl font-bold text-white tracking-wider">
-              THE VIEW ISLAND
+              KNOW YOUR VIEWS
             </span>
             <p className="text-sm leading-6 text-gray-300">
               Delivering accurate, timely, and unbiased news from around the globe. 
@@ -171,7 +171,7 @@ export default function Footer() {
         {/* 4. Bottom Copyright */}
         <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-gray-400">
-            &copy; {new Date().getFullYear()} The View Island, Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Know Your Views, Inc. All rights reserved.
           </p>
         </div>
       </div>

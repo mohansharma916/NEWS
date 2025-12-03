@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://knowyourviews.com'; // Change this to your real domain later
 
   // 2. Map posts to sitemap format
-  const postEntries: MetadataRoute.Sitemap = posts.map((post: any) => ({
+  const postEntries: MetadataRoute.Sitemap = posts.map((post: { slug: any; publishedAt: any; updatedAt: any; }) => ({
     url: `${baseUrl}/news/${post.slug}`,
     lastModified: new Date(post.publishedAt || post.updatedAt),
     changeFrequency: 'daily',

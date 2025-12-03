@@ -15,7 +15,7 @@ export default function AboutPage() {
           Empowering You With The Facts
         </h1>
         <p className="mt-6 text-lg leading-8 text-gray-600">
-          At <strong>Know Your Views</strong>, we believe that understanding the world shouldn't be complicated. 
+          At <strong>Know Your Views</strong>, we believe that understanding the world shouldn&apos;t be complicated.
           We strip away the noise to bring you clarity, context, and perspective.
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function AboutPage() {
           that covers Technology, Business, and Global Events with depth and accuracy.
         </p>
         <p>
-          We don't just tell you <em>what</em> happened; we help you understand <em>why</em> it matters.
+          We don&apos;t just tell you <em>what</em> happened; we help you understand <em>why</em> it matters.
         </p>
 
         <hr className="my-10 border-gray-200" />

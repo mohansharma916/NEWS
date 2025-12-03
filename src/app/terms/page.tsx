@@ -16,7 +16,7 @@ export default function TermsPage() {
         <p className="text-gray-500">Last updated: {currentDate}</p>
 
         <p>
-          Welcome to <strong>Know Your Views</strong>! These terms and conditions outline the rules and regulations for the use of Know Your Views' Website, located at{" "}
+          Welcome to <strong>Know Your Views</strong>! These terms and conditions outline the rules and regulations for the use of Know Your Views Website, located at{" "}
           <Link href="/" className="text-blue-600 hover:underline">
             https://knowyourviews.com
           </Link>.
@@ -50,14 +50,14 @@ export default function TermsPage() {
           3. Your Content
         </h2>
         <p>
-          In these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images, or other material you choose to display on this Website (e.g., comments). By displaying Your Content, you grant Know Your Views a non-exclusive, worldwide irrevocable, sub-licensable license to use, reproduce, adapt, publish, translate, and distribute it in any and all media.
+          In these Website Standard Terms and Conditions, &quot;Your Content&quot; shall mean any audio, video text, images, or other material you choose to display on this Website (e.g., comments). By displaying Your Content, you grant Know Your Views a non-exclusive, worldwide irrevocable, sub-licensable license to use, reproduce, adapt, publish, translate, and distribute it in any and all media.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-8">
           4. No Warranties
         </h2>
         <p>
-          This Website is provided "as is," with all faults, and Know Your Views expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.
+          This Website is provided &quot;as is,&quot; with all faults, and Know Your Views expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-8">

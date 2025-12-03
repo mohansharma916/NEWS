@@ -10,7 +10,7 @@ export default function CookiePolicyPage() {
         <p className="text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
 
         <p>
-          This Cookie Policy explains how Know Your Views ("we", "us", or "our") uses cookies and similar technologies to recognize you when you visit our website at{" "}
+          This Cookie Policy explains how Know Your Views (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies and similar technologies to recognize you when you visit our website at{" "}
           <Link href="/" className="text-blue-600">https://knowyourviews.com</Link>. It explains what these technologies are and why we use them, as well as your rights to control our use of them.
         </p>
 
@@ -29,7 +29,7 @@ export default function CookiePolicyPage() {
 
         <h3>3. Google AdSense & DoubleClick</h3>
         <p>
-          We use Google AdSense to serve ads. Google uses the DoubleClick cookie to serve ads based on a user's prior visits to our website or other websites on the Internet.
+          We use Google AdSense to serve ads. Google uses the DoubleClick cookie to serve ads based on a user&apos;s prior visits to our website or other websites on the Internet.
           Users may opt out of the use of the DART cookie by visiting the Google Ad and Content Network privacy policy.
         </p>
 

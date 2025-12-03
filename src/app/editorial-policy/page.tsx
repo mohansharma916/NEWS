@@ -29,12 +29,12 @@ export default function EditorialPolicyPage() {
         </p>
         <ul>
           <li><strong>Minor Errors:</strong> Typos or minor inaccuracies will be corrected immediately.</li>
-          <li><strong>Substantive Errors:</strong> If a factual error changes the context of a story, we will add a "Correction" note at the bottom of the article explaining what was changed and when.</li>
+          <li><strong>Substantive Errors:</strong> If a factual error changes the context of a story, we will add a &quot;Correction&quot; note at the bottom of the article explaining what was changed and when.</li>
         </ul>
 
         <h3>3. Independence and Integrity</h3>
         <p>
-          Our editorial content is not influenced by advertisers, sponsors, or political interests. Sponsored content, if present, will always be clearly labeled as "Sponsored" or "Advertisement" to distinguish it from independent journalism.
+          Our editorial content is not influenced by advertisers, sponsors, or political interests. Sponsored content, if present, will always be clearly labeled as &quot;Sponsored&quot; or &quot;Advertisement&quot; to distinguish it from independent journalism.
         </p>
 
         <h3>4. Sourcing and Attribution</h3>

@@ -146,7 +146,7 @@ export default function SearchBox() {
         marginTop: SearchMenuOpen && !TabletMatches ? -48 : 0,
         marginBottom: SearchMenuOpen && !TabletMatches ? 48 : 0,
       }}
-      transition={{ key: "twin", duration: 0.1 }}
+      transition={{ duration: 0.1 }}
       // className={`${SearchMenuOpen && TabletMatches && !DesktopMatches ? '-ml-[13.25rem] -mr-[13.75rem]' : TabletMatches ? '-ml-5 mr-0' : 'ml-0 mr-0'} ${SearchMenuOpen && !TabletMatches ? "-translate-y-12" : "translate-y-0"} transition-all relative z-20 col-span-2 mx-auto flex w-full flex-col bg-white pt-1 duration-100 ease-out md:pt-0 lg:w-[calc(100%/2.5)] lg:max-w-[40rem]`}
       className="lg:max-w-[40rem]} relative z-30 col-span-2 mx-auto flex w-full flex-col bg-white pt-1 md:pt-0 lg:w-[calc(100%/2.5)]"
     >
@@ -189,7 +189,7 @@ export default function SearchBox() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 100 }}
             exit={{ opacity: 0 }}
-            transition={{ type: "twin", duration: 0.1 }}
+            transition={{ type: "tween", duration: 0.1 }}
             className="absolute bottom-0 h-[0.1rem] w-full bg-gray-500/75 md:h-[0.2rem]"
           />
         )}

@@ -12,14 +12,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Sitemap Fetch Error:", error);
   }
 
-  const baseUrl = 'https://knowyourviews.com'; // Change this to your real domain later
+  const baseUrl = 'https://knowyourviews.com'; 
 
   // 2. Map posts to sitemap format
   const postEntries: MetadataRoute.Sitemap = posts.map((post: { slug: string; publishedAt: string; updatedAt: string; }) => ({
     url: `${baseUrl}/news/${post.slug}`,
     lastModified: new Date(post.publishedAt || post.updatedAt),
     changeFrequency: 'daily',
-    priority: 0.7, // Articles are high priority
+    priority: 0.7, 
   }));
 
   // 3. Add static pages (Home, About, etc.)

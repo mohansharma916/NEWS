@@ -259,7 +259,7 @@ export default function NavBar() {
           initial="initial"
           variants={variants}
           onAnimationComplete={onAnimationComplete}
-          transition={{ type: "twin", duration: 0.1 }}
+          transition={{ type: "tween", duration: 0.1 }}
           className="absolute bottom-0 z-10 h-[0.2rem] rounded-t-full bg-blue-550 md:h-1"
         />
       </div>

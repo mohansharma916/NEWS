@@ -37,14 +37,14 @@ export async function generateMetadata(
 
   return {
     title: article.title,
-    description: article.excerpt || "Read the latest news on The View Island.",
+    description: article.excerpt || "Read the latest news on Know Your Views.",
     
     // Open Graph (Facebook, WhatsApp, LinkedIn)
     openGraph: {
       title: article.title,
-      description: article.excerpt || "Read the latest news on The View Island.",
-      url: `https://theviewisland.com/news/${article.slug}`, // Replace with env var in prod
-      siteName: "The View Island",
+      description: article.excerpt || "Read the latest news on Know Your Views.",
+      url: `https://knowyourviews.com/news/${article.slug}`, // Replace with env var in prod
+      siteName: "Know Your Views",
       images: [
         {
           url: article.coverImage || "/images/og-default.jpg", // Fallback image
@@ -66,7 +66,7 @@ export async function generateMetadata(
       title: article.title,
       description: article.excerpt || "Read the latest news.",
       images: [article.coverImage || "/images/og-default.jpg"],
-      creator: "@theviewisland", // Your handle
+      creator: "@knowyourviews", // Your handle
     },
   };
 }
@@ -93,7 +93,7 @@ export default async function ArticlePage(props: Props) {
   author: [{
       '@type': 'Person',
       name: article.author?.fullName || 'Editorial Team',
-      url: 'https://theviewisland.com/about'
+      url: 'https://knowyourviews.com/about'
   }]
 };
 

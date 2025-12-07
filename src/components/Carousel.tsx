@@ -1,14 +1,15 @@
 "use client";
 
-import dynamic from "next/dynamic";
+// 1. Change these to STANDARD imports
+// This includes the HTML in the initial server response
+import SliderCarousel from "./SliderCarousel";
+import GridCarousel from "./GridCarousel"; 
+
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // Removed Suspense (not needed here if we don't lazy load)
 import { getDate } from "utils/Utility";
-import { Article } from "../lib/api";// <--- Import new type
-
-const SliderCarousel = dynamic(() => import("./SliderCarousel"), { ssr: false });
-const GridCarousel = dynamic(() => import("./GridCarousel"), { ssr: false });
+import { Article } from "../lib/api";
 
 type Props = {
   articles: Article[];
@@ -22,12 +23,13 @@ interface WeatherData {
 }
 
 export default function Carousel({ articles, isMobile }: Props) {
+  // 2. Direct render. The server will now fill this content immediately.
+  // Note: Ensure GridCarousel/SliderCarousel handle hydration correctly.
+  
   if (isMobile) {
     return (
       <CarouselWrapper isMobile={isMobile} className="relative h-72">
-        <Suspense>
-          <SliderCarousel article={articles} />
-        </Suspense>
+        <SliderCarousel article={articles} />
       </CarouselWrapper>
     );
   } else {
@@ -36,9 +38,7 @@ export default function Carousel({ articles, isMobile }: Props) {
         isMobile={isMobile}
         className="relative flex w-full h-[32rem] md:h-[50rem] lg:h-[55rem]"
       >
-        <Suspense>
-          <GridCarousel article={articles} />
-        </Suspense>
+        <GridCarousel article={articles} />
       </CarouselWrapper>
     );
   }
@@ -66,24 +66,20 @@ const CarouselWrapper = ({
 }) => {
   const [weather, setWeather] = useState<WeatherData>({
     temp: 21,
-    city: "New Delhi", // Default fallback
+    city: "New Delhi", 
     code: 1, 
   });
 
+  // Weather is a "Client Enhancement" so useEffect is fine here.
+  // It does not block the main image from loading.
   useEffect(() => {
     const initWeather = async () => {
       try {
-        // 1. Get Location from IP (No permission needed)
-        // ipapi.co is free (up to 1000 requests/day) and works well.
-        // Alternatives: ipwho.is, ip-api.com
         const locationRes = await fetch("https://ipapi.co/json/");
-        
         if (!locationRes.ok) throw new Error("Location fetch failed");
-        
         const locData = await locationRes.json();
         const { latitude, longitude, city } = locData;
 
-        // 2. Get Weather using those Coords
         const weatherRes = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
         );
@@ -91,13 +87,12 @@ const CarouselWrapper = ({
 
         setWeather({
           temp: Math.round(weatherData.current_weather.temperature),
-          city: city || "India", // Use the city from IP API
+          city: city || "India", 
           code: weatherData.current_weather.weathercode,
         });
 
       } catch (error) {
         console.error("Weather/Location Error:", error);
-        // Fail silently; the default "New Delhi" state will persist
       }
     };
 
@@ -136,10 +131,9 @@ const CarouselWrapper = ({
             <span className="text-base font-medium md:text-2xl md:font-semibold">
               {weather.temp}°C
             </span>
-            <span className="hidden text-[0.65rem] font-medium text-blue-550 md:block md:text-xs">
-              {/* Optional: Show source or just hide */}
+            {/* <span className="hidden text-[0.65rem] font-medium text-blue-550 md:block md:text-xs">
               open-meteo
-            </span>
+            </span> */}
           </div>
         </Link>
       </div>

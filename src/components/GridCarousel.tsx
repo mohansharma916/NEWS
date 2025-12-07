@@ -26,6 +26,7 @@ export default function GridCarousel({ article }: Props) {
             src={article[0]?.coverImage ?? ""}
             alt={article[0]?.title ?? ""}
             className="object-cover"
+            priority={true}
           />
           <div className="absolute left-0 top-0 flex h-full w-full flex-col">
             <div className="flex h-full w-full flex-col justify-end bg-gradient-to-t from-gray-100 from-55% to-80% px-5 pb-5 md:from-45% md:to-70% 2xl:px-12 2xl:pb-11">
@@ -68,6 +69,7 @@ export default function GridCarousel({ article }: Props) {
                 src={article[1]?.coverImage ?? ""}
                 alt={article[1]?.title ?? ""}
                 className="object-cover blur-2xl"
+                priority={true}
               />
               <div className="absolute left-0 top-0 flex h-full w-full flex-col">
                 <div className="flex h-full w-full flex-col justify-between bg-gray-100 p-2.5 md:p-5">
@@ -99,6 +101,7 @@ export default function GridCarousel({ article }: Props) {
                 src={article[2]?.coverImage ?? "#"}
                 alt={article[2]?.title ?? "#"}
                 className="object-cover blur-2xl"
+                priority={true}
               />
               <div className="absolute left-0 top-0 flex h-full w-full flex-col">
                 <div className="flex h-full w-full flex-col justify-between bg-gray-100 p-2.5 md:p-5">
@@ -135,6 +138,7 @@ export default function GridCarousel({ article }: Props) {
               src={article[3]?.coverImage ?? ""}
               alt={article[3]?.title ?? ""}
               className="object-cover"
+              priority={true}
             />
             <div className="absolute left-0 top-0 flex h-full w-full flex-col">
               <div className="flex h-full w-full flex-col justify-end bg-gradient-to-t from-gray-100 from-45% to-70% p-5">
@@ -169,6 +173,7 @@ export default function GridCarousel({ article }: Props) {
                 src={article[4]?.coverImage ?? "#"}
                 alt={article[4]?.title ?? "#"}
                 className="object-cover blur-2xl"
+                priority={true}
               />
               <div className="absolute left-0 top-0 flex h-full w-full flex-col">
                 <div className="flex h-full w-full flex-col justify-between bg-gray-100 p-5">
@@ -191,7 +196,7 @@ export default function GridCarousel({ article }: Props) {
             </div>
           )}
 
-          {/* Social Icons (Static) */}
+          {/* Social Icons (Static)
           <div className="flex h-[40%] w-full space-x-2.5">
             <Link href={"#"} className="flex h-full w-full items-center justify-center rounded-xl bg-red-200/75 md:rounded-2xl">
               <Image height={40} width={40} src="/images/youtube.png" alt="youtube logo" className="scale-[0.7] object-contain lg:scale-[0.8] xl:scale-[0.9] 2xl:scale-100" />
@@ -205,7 +210,7 @@ export default function GridCarousel({ article }: Props) {
             <Link href={"#"} className="flex h-full w-full items-center justify-center rounded-xl bg-gray-100 md:rounded-2xl">
               <Image height={30} width={30} src="/images/twitter.png" alt="twitter logo" className="scale-[0.7] object-contain lg:scale-[0.8] xl:scale-[0.9] 2xl:scale-100" />
             </Link>
-          </div> 
+          </div>  */}
 
           {/* Article [5] */}
           {article[5] && (
@@ -215,6 +220,7 @@ export default function GridCarousel({ article }: Props) {
                 src={article[5]?.coverImage ?? "#"}
                 alt={article[5]?.title ?? "#"}
                 className="object-cover blur-2xl"
+                priority={true}
               />
               <div className="absolute left-0 top-0 flex h-full w-full flex-col">
                 <div className="flex h-full w-full flex-col justify-between bg-gray-100 p-5">
@@ -251,6 +257,7 @@ export default function GridCarousel({ article }: Props) {
               src={article[6]?.coverImage ?? ""}
               alt={article[6]?.title ?? ""}
               className="object-cover blur-2xl"
+              priority={true}
             />
             <div className="absolute left-0 top-0 flex h-full w-full flex-col">
               <div className="flex h-full w-full flex-col justify-between bg-gray-100 p-5">

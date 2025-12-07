@@ -6,48 +6,64 @@ import { getDate } from "utils/Utility";
 import { ClockIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Breadcrumbs from "components/Breadcrumbs";
 import ViewCounter from "components/ViewCounter";
-import { Metadata, ResolvingMetadata } from "next"; // <--- Import Types
+import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 // ==========================================
-// 1. DYNAMIC SEO METADATA
+// 1. DYNAMIC SEO METADATA (OPTIMIZED)
 // ==========================================
 export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Read route params
   const params = await props.params;
-  
-  // Fetch data
   const article = await getArticleBySlug(params.slug);
 
-  // If article doesn't exist, return generic metadata (or 404 will handle it later)
   if (!article) {
-    return {
-      title: "Article Not Found",
-    };
+    return { title: "Article Not Found" };
   }
 
-  // Optionally access parent metadata (e.g. site name)
   const previousImages = (await parent).openGraph?.images || [];
+  
+  // SEO 1: Define the specific URL (Canonical)
+  const pageUrl = `https://knowyourviews.com/news/${article.slug}`;
+
+  // SEO 2: Generate Keywords
+  // We combine the Category + generic terms. 
+  // Ideally, your API should return a 'tags' array (e.g., ["Politics", "Modi", "Election"])
+  const keywords = [
+    article.category?.name || "News",
+    "Latest News",
+    "India News", 
+    "World News",
+    "Know Your Views",
+    ...(article.title.split(" ").slice(0, 5)) // Heuristic: Use first 5 words of title as keywords
+  ];
 
   return {
-    title: article.title,
-    description: article.excerpt || "Read the latest news on The View Island.",
+    // SEO 3: Title Template (Includes Brand Name)
+    title: `${article.title} | Know Your Views`, 
+    description: article.excerpt || "Read the latest news on Know Your Views.",
     
-    // Open Graph (Facebook, WhatsApp, LinkedIn)
+    // SEO 4: Explicit Keywords Tag
+    keywords: keywords,
+
+    // SEO 5: Canonical URL (Crucial for authority)
+    alternates: {
+      canonical: pageUrl,
+    },
+
     openGraph: {
       title: article.title,
-      description: article.excerpt || "Read the latest news on The View Island.",
-      url: `https://theviewisland.com/news/${article.slug}`, // Replace with env var in prod
-      siteName: "The View Island",
+      description: article.excerpt || "Read the latest news on Know Your Views.",
+      url: pageUrl,
+      siteName: "Know Your Views",
       images: [
         {
-          url: article.coverImage || "/images/og-default.jpg", // Fallback image
+          url: article.coverImage || "/images/og-default.jpg",
           width: 1200,
           height: 630,
           alt: article.title,
@@ -57,16 +73,17 @@ export async function generateMetadata(
       locale: "en_US",
       type: "article",
       publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt, // Helpful for Google News
+      section: article.category?.name, // Helps categorize content
       authors: [article.author?.fullName || "Editorial Team"],
     },
 
-    // Twitter Card (X)
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt || "Read the latest news.",
       images: [article.coverImage || "/images/og-default.jpg"],
-      creator: "@theviewisland", // Your handle
+      creator: "@knowyourviews",
     },
   };
 }
@@ -82,29 +99,36 @@ export default async function ArticlePage(props: Props) {
     notFound();
   }
 
-
   const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  headline: article.title,
-  image: [article.coverImage],
-  datePublished: article.publishedAt,
-  dateModified: article.updatedAt,
-  author: [{
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: article.title,
+    image: [article.coverImage],
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    description: article.excerpt, // Added description to Schema
+    author: [{
       '@type': 'Person',
       name: article.author?.fullName || 'Editorial Team',
-      url: 'https://theviewisland.com/about'
-  }]
-};
+      url: 'https://knowyourviews.com/about'
+    }],
+    publisher: {
+      '@type': 'Organization',
+      name: 'Know Your Views',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://knowyourviews.com/logo.png' // Update this
+      }
+    }
+  };
 
   return (
     <main className="min-h-screen bg-white">
-      {/* View Counter (Client Component) */}
       <ViewCounter postId={article.id} />
       <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* Sticky Header */}
       <div className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
@@ -127,12 +151,14 @@ export default async function ArticlePage(props: Props) {
         </div>
       </div>
 
+      {/* SEO: Use semantic 'article' tag */}
       <article className="mx-auto flex w-full max-w-[110rem] flex-col pb-20">
+        
         {/* Hero Section */}
         <div className="relative h-[20rem] w-full md:h-[30rem] lg:h-[35rem]">
           <Image
             src={article.coverImage || "/images/placeholder.jpg"}
-            alt={article.title}
+            alt={article.title} // Ensure this has keywords in CMS
             fill
             className="object-cover brightness-75"
             priority
@@ -147,6 +173,7 @@ export default async function ArticlePage(props: Props) {
                   {article.category.name}
                 </Link>
               )}
+              {/* SEO: H1 is the most important tag. Ensure the title contains the main keyword. */}
               <h1 className="text-3xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
                 {article.title}
               </h1>
@@ -179,14 +206,13 @@ export default async function ArticlePage(props: Props) {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 md:hidden">
-                 <Breadcrumbs category={article.category} title={article.title} />
-              </div>
            </div>
         </div>
 
         {/* Content Body */}
         <div className="mx-auto mt-10 w-full max-w-3xl px-5">
+          {/* SEO NOTE: The inner HTML should contain H2 and H3 tags with keywords. 
+              This depends on the content coming from the Database, not React. */}
           <div 
             className="prose prose-lg prose-blue max-w-none text-gray-800 md:prose-xl"
             dangerouslySetInnerHTML={{ __html: article.content }}

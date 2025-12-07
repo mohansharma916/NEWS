@@ -33,12 +33,43 @@ export default async function Home(props: Props) {
   const viewport = (searchParams.viewport as string) ?? "desktop";
   const isMobile = viewport === "mobile";
 
+  // 1. Define the Organization Schema
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsMediaArticlesBlogOrganization',
+    name: 'Know Your Views',
+    url: 'https://knowyourviews.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://knowyourviews.com/logo.png', // <--- Make sure this image exists!
+      width: 112,
+      height: 112
+    },
+    // List your social profiles here to help Google verify your brand
+    sameAs: [
+      // 'https://www.facebook.com/knowyourviews',
+      // 'https://twitter.com/knowyourviews',
+      'https://www.instagram.com/knowyourviews'
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      // telephone: '+91-1234567890', // Optional
+      contactType: 'customer service',
+      areaServed: 'IN'
+    }
+  };
+
   // 2. ONLY await the Critical LCP Data (Trending)
   // We want this to block slightly so the hero image arrives with the HTML (better LCP)
   const trendingArticles = await getTrendingPosts();
 
   return (
     <div className="m-0 mx-auto flex w-full max-w-[110rem] flex-col p-0">
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* This renders INSTANTLY now, without waiting for the bottom categories */}
       <Carousel articles={trendingArticles} isMobile={isMobile} />

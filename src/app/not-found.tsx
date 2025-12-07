@@ -51,9 +51,6 @@ export default async function NotFound(props: props) {
             </span>
           </Link>
         </div>
-        <div className="flex w-full items-center justify-start">
-          {/* <SignInBackButton onClick={handleBackToHome} Label="Back to home" /> */}
-        </div>
       </div>
     </div>
   );

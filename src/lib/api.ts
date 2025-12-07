@@ -1,6 +1,5 @@
 // lib/api.ts
 
-// 1. Define the interface based on our NestJS Prisma Schema
 export interface Article {
   id: string;
   title: string;
@@ -29,13 +28,18 @@ export interface PaginatedResponse<T> {
   };
 }
 
+// Global constant to ensure consistency
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-// 2. Fetch Trending Posts (For Carousel)
+// 1. Fetch Trending Posts (The LCP Critical Path)
 export async function getTrendingPosts(): Promise<Article[]> {
   const res = await fetch(`${API_URL}/posts/trending`, {
-    cache: "no-store", // Ensure fresh news
+    // CHANGE: "no-store" -> revalidate: 60
+    // This makes the homepage INSTANT for 99% of users.
+    // Next.js serves the cached HTML from RAM, then updates it in the background.
+    next: { revalidate: 60 } 
   });
+  
   if (!res.ok) return [];
   return res.json();
 }
@@ -44,35 +48,32 @@ export async function getPostsByCategory(
   categorySlug: string, 
   page = 1, 
   limit = 10
-): Promise<Article[]> { // We can keep returning Article[] to not break UI yet
+): Promise<Article[]> { 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/posts?category=${categorySlug}&page=${page}&limit=${limit}`, 
+    `${API_URL}/posts?category=${categorySlug}&page=${page}&limit=${limit}`, 
     { next: { revalidate: 60 } }
   );
 
   if (!res.ok) return [];
   const json = await res.json();
   
-  // Return just the data array to keep your components happy for now
+  // Return just the data array
   return json.data; 
 }
 
-
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  // Use the backend URL (localhost:3001)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/posts/${slug}`, {
-    next: { revalidate: 60 }, // Cache for 60 seconds
+  const res = await fetch(`${API_URL}/posts/${slug}`, {
+    next: { revalidate: 60 }, 
   });
 
   if (!res.ok) return null;
-  
   return res.json();
 }
 
-
 export async function incrementViewCount(postId: string): Promise<void> {
-  // Fire and forget - we don't need to wait for the result
-  fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/posts/${postId}/view`, {
+  // Fire and forget - Keep 'no-store' here because this is an ACTION, not data fetching.
+  // We don't want to cache the "vote".
+  fetch(`${API_URL}/posts/${postId}/view`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     cache: "no-store",

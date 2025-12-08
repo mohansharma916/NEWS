@@ -25,7 +25,7 @@ const Novante = localFont({
 export const metadata: Metadata = {
   title: {
     template: '%s | Know Your Views',
-    default: 'Know Your Views | Latest Bollywood, World India, Automotive, Stocks,  Tech Updates and many more.', // Stronger default
+    default: 'Know Your Views | Bollywood, India, Automotive, Stocks, Tech.', // Stronger default
   },
   description: 'Understand the world with Know Your Views. Your trusted source for balanced news in Tech, Business, and World events. Get the latest insights on technology, business, sports, and entertainment on Know Your Views.',
   metadataBase: new URL('https://knowyourviews.com'), 

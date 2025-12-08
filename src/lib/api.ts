@@ -19,6 +19,13 @@ export interface Article {
   };
 }
 
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   meta: {
@@ -38,6 +45,19 @@ export async function getTrendingPosts(): Promise<Article[]> {
     // This makes the homepage INSTANT for 99% of users.
     // Next.js serves the cached HTML from RAM, then updates it in the background.
     next: { revalidate: 60 } 
+  });
+  
+  if (!res.ok) return [];
+  return res.json();
+}
+
+
+export async function getAllCategories(): Promise<Category[]> {
+  const res = await fetch(`${API_URL}/categories`, {
+    // CHANGE: "no-store" -> revalidate: 60
+    // This makes the homepage INSTANT for 99% of users.
+    // Next.js serves the cached HTML from RAM, then updates it in the background.
+    next: { revalidate: 3600 } 
   });
   
   if (!res.ok) return [];

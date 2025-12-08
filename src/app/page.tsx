@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Carousel from "components/Carousel";
 import CategoryList from "components/CategoryList"; // I assume this displays the data
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-import { getTrendingPosts, getPostsByCategory } from "../lib/api";
+import { getTrendingPosts, getPostsByCategory,getAllCategories } from "../lib/api";
 
 // 1. Create a wrapper component to handle data fetching per category
 // This isolates the slow fetches so they don't block the main page
@@ -61,7 +61,10 @@ export default async function Home(props: Props) {
 
   // 2. ONLY await the Critical LCP Data (Trending)
   // We want this to block slightly so the hero image arrives with the HTML (better LCP)
-  const trendingArticles = await getTrendingPosts();
+ const [trendingArticles, categories] = await Promise.all([
+    getTrendingPosts(),
+    getAllCategories()
+  ]);
 
   return (
     <div className="m-0 mx-auto flex w-full max-w-[110rem] flex-col p-0">
@@ -87,8 +90,19 @@ export default async function Home(props: Props) {
         {/* 3. The Grid - Wrapped in Suspense */}
         {/* Each component fetches its own data independently. If 'Sports' is slow, only 'Sports' lags. */}
         <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+
+          {categories.map((cat) => (
+            <Suspense key={cat.id} fallback={<CategorySkeleton />}>
+              {/* Pass the dynamic slug and name from the database */}
+              <CategorySection 
+                category={cat.slug} 
+                heading={cat.name} 
+                isMobile={isMobile} 
+              />
+            </Suspense>
+          ))}
           
-          <Suspense fallback={<CategorySkeleton />}>
+          {/* <Suspense fallback={<CategorySkeleton />}>
             <CategorySection category="india" heading="India" isMobile={isMobile} />
           </Suspense>
 
@@ -110,7 +124,7 @@ export default async function Home(props: Props) {
 
           <Suspense fallback={<CategorySkeleton />}>
             <CategorySection category="entertainment" heading="Entertainment" isMobile={isMobile} />
-          </Suspense>
+          </Suspense> */}
 
         </div>
       </section>

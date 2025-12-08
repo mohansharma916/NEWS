@@ -109,7 +109,7 @@ const CarouselWrapper = ({
           <p className="text-xs text-gray-600 md:text-base">{getDate()}</p>
         </div>
         
-        <Link
+        {/* <Link
           href={`https://www.google.com/search?q=weather+in+${weather.city}`}
           target="_blank"
           className="flex items-center space-x-1 rounded-2xl md:items-start md:space-x-2.5 md:px-5"
@@ -131,11 +131,9 @@ const CarouselWrapper = ({
             <span className="text-base font-medium md:text-2xl md:font-semibold">
               {weather.temp}°C
             </span>
-            {/* <span className="hidden text-[0.65rem] font-medium text-blue-550 md:block md:text-xs">
-              open-meteo
-            </span> */}
+           
           </div>
-        </Link>
+        </Link> */}
       </div>
       <div className={className}>{children}</div>
     </section>

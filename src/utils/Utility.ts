@@ -130,3 +130,25 @@ export const validArticles = async (
   await Promise.all(pool);
   return results.slice(0, limit);
 };
+
+
+
+// utils/Utility.ts
+
+export const calculateReadingTime = (content: string): string => {
+  if (!content) return "1 min read";
+
+  // 1. Strip HTML tags to get pure text
+  const text = content.replace(/<[^>]*>?/gm, '');
+
+  // 2. Count words (split by whitespace)
+  const wordCount = text.trim().split(/\s+/).length;
+
+  // 3. Average reading speed (words per minute)
+  const wpm = 225; 
+
+  // 4. Calculate time
+  const minutes = Math.ceil(wordCount / wpm);
+
+  return `${minutes} min read`;
+};

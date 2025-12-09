@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getArticleBySlug } from "../../../lib/api";
-import { getDate } from "utils/Utility";
+import { calculateReadingTime, getDate } from "utils/Utility";
 import { ClockIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Breadcrumbs from "components/Breadcrumbs";
 import ViewCounter from "components/ViewCounter";
@@ -98,6 +98,9 @@ export default async function ArticlePage(props: Props) {
   if (!article) {
     notFound();
   }
+
+
+  const readingTime = calculateReadingTime(article.content);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -201,7 +204,7 @@ export default async function ArticlePage(props: Props) {
                     <span>{getDate(article.publishedAt?.slice(0, 10) || "")}</span>
                     <span className="mx-2">•</span>
                     <span className="flex items-center">
-                       <ClockIcon className="mr-1 h-4 w-4" /> 5 min read
+                       <ClockIcon className="mr-1 h-4 w-4" /> {readingTime}
                     </span>
                   </div>
                 </div>

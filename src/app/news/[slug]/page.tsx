@@ -95,6 +95,7 @@ export default async function ArticlePage(props: Props) {
   const params = await props.params;
   const article = await getArticleBySlug(params.slug);
 
+
   if (!article) {
     notFound();
   }
@@ -198,7 +199,10 @@ export default async function ArticlePage(props: Props) {
                 </div>
                 <div>
                   <p className="font-bold text-gray-900">
-                    {article.author?.fullName || "Editorial Team"}
+                    <Link href={`/author/${article?.author?.id}`} className="hover:underline">
+                        {article?.author?.fullName || "Editorial Team"} 
+                    </Link>
+                
                   </p>
                   <div className="flex items-center text-sm text-gray-500">
                     <span>{getDate(article.publishedAt?.slice(0, 10) || "")}</span>

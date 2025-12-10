@@ -101,31 +101,6 @@ export default async function Home(props: Props) {
               />
             </Suspense>
           ))}
-          
-          {/* <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="india" heading="India" isMobile={isMobile} />
-          </Suspense>
-
-          <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="world" heading="World" isMobile={isMobile} />
-          </Suspense>
-
-          <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="technology" heading="Technology" isMobile={isMobile} />
-          </Suspense>
-
-          <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="business" heading="Business" isMobile={isMobile} />
-          </Suspense>
-
-          <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="sports" heading="Sports" isMobile={isMobile} />
-          </Suspense>
-
-          <Suspense fallback={<CategorySkeleton />}>
-            <CategorySection category="entertainment" heading="Entertainment" isMobile={isMobile} />
-          </Suspense> */}
-
         </div>
       </section>
     </div>

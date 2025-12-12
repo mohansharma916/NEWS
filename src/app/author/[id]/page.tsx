@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { getAuthorById } from "../../../lib/api";
 import { getDate } from "utils/Utility";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // --- ICONS FOR SOCIALS (You can use react-icons or SVGs) ---
 function XIcon({ className }: { className?: string }) {
@@ -74,6 +75,7 @@ export default async function AuthorPage(props: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <GoogleAnalytics gaId="G-EF8V47D1TY" />
 
       {/* --- HEADER SECTION --- */}
       <div className="bg-slate-50 border-b border-gray-200">

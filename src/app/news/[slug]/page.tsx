@@ -7,6 +7,7 @@ import { ClockIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Breadcrumbs from "components/Breadcrumbs";
 import ViewCounter from "components/ViewCounter";
 import { Metadata, ResolvingMetadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -95,6 +96,8 @@ export default async function ArticlePage(props: Props) {
   const params = await props.params;
   const article = await getArticleBySlug(params.slug);
 
+  console.log("ArticlePage rendering for slug:", article?.author?.id); // Debug log
+
 
   if (!article) {
     notFound();
@@ -128,6 +131,7 @@ export default async function ArticlePage(props: Props) {
 
   return (
     <main className="min-h-screen bg-white">
+      <GoogleAnalytics gaId="G-EF8V47D1TY" />
       <ViewCounter postId={article.id} />
       <script
         type="application/ld+json"

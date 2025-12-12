@@ -14,6 +14,7 @@
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@mui/material": "^6.1.10",
+    "@next/third-parties": "^16.0.10",
     "caniuse-lite": "^1.0.30001757",
     "critters": "^0.0.25",
     "cssnano": "^7.0.6",

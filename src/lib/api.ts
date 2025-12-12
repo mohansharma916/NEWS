@@ -85,6 +85,25 @@ export async function getAuthorById(id: string): Promise<AuthorProfile | null> {
 }
 
 
+export async function subscribeToNewsletter(email: string): Promise<{ success: boolean; status: number }> {
+  try {
+    const res = await fetch(`${API_URL}/subscribe-newsletters`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    // We return the status code so the UI can decide what message to show
+    // 201 = Created, 409 = Already Exists, 400 = Bad Request
+    return { success: res.ok, status: res.status };
+    
+  } catch (error) {
+    console.error("Newsletter API Error:", error);
+    return { success: false, status: 500 }; // 500 = Network/Server Error
+  }
+}
+
+
 export async function getAllCategories(): Promise<Category[]> {
   const res = await fetch(`${API_URL}/categories`, {
     // CHANGE: "no-store" -> revalidate: 60

@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { AuthProvider } from "../context/authContext";
 import Footer from "components/Footer";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${NextFont} overflow-y-scroll antialiased`}>
+         <GoogleAnalytics gaId="G-EF8V47D1TY" />
         <AuthProvider>
         <MotionOptimize>
           <Suspense>

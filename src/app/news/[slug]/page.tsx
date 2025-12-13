@@ -135,6 +135,7 @@ export default async function ArticlePage(props: Props) {
   return (
     <main className="min-h-screen bg-white">
       <GoogleAnalytics gaId="G-EF8V47D1TY" />
+      <meta name="google-adsense-account" content="ca-pub-2187551953908136"></meta>
       <ViewCounter postId={article.id} />
       <script
         type="application/ld+json"

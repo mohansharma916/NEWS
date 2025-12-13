@@ -61,6 +61,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${NextFont} overflow-y-scroll antialiased`}>
+        <meta name="google-adsense-account" content="ca-pub-2187551953908136"></meta>
          <GoogleAnalytics gaId="G-EF8V47D1TY" />
         <AuthProvider>
         <MotionOptimize>

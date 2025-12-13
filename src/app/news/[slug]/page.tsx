@@ -56,7 +56,10 @@ export async function generateMetadata(
     alternates: {
       canonical: pageUrl,
     },
-
+    
+ verification: {
+    google: 'ca-pub-2187551953908136', // Replace with your actual publisher ID
+  },
     openGraph: {
       title: article.title,
       description: article.excerpt || "Read the latest news on Know Your Views.",

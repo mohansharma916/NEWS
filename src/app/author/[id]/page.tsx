@@ -76,6 +76,7 @@ export default async function AuthorPage(props: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <GoogleAnalytics gaId="G-EF8V47D1TY" />
+      <meta name="google-adsense-account" content="ca-pub-2187551953908136"></meta>
 
       {/* --- HEADER SECTION --- */}
       <div className="bg-slate-50 border-b border-gray-200">

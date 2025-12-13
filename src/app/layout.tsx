@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
   },
+  verification: {
+    google: 'ca-pub-2187551953908136', // Replace with your actual publisher ID
+  }
 };
 
 export const viewport: Viewport = {
